@@ -58,6 +58,7 @@ router.put("/:id", async (req, res) => {
     const updatedCategory = await Category.findByPk(req.params.id);
     res.json(updatedCategory);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Internal server error." });
   }
 });
