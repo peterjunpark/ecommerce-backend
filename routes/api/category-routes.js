@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   // find all categories
   // be sure to include its associated Products
   try {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({ include: Product });
     res.json(categories);
   } catch (err) {
     console.error(err);
@@ -19,7 +19,9 @@ router.get("/:id", async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
-    const category = await Category.findByPk(req.params.id);
+    const category = await Category.findByPk(req.params.id, {
+      include: Product,
+    });
     if (!category) {
       res.status(404).json({ message: "Category not found!" });
       return;
@@ -53,7 +55,7 @@ router.put("/:id", async (req, res) => {
         },
       }
     );
-    const updatedCategory = await Category.findByPk(req.params.id)
+    const updatedCategory = await Category.findByPk(req.params.id);
     res.json(updatedCategory);
   } catch (err) {
     res.status(500).json({ message: "Internal server error." });
