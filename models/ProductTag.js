@@ -7,8 +7,8 @@ class ProductTag extends Model {}
 // junction table
 ProductTag.init(
   {
-    // define columns
-    product_id: {
+  // define columns
+  product_id: {
       type: DataTypes.INTEGER,
     },
     tag_id: {
